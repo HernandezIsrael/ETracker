@@ -1,17 +1,198 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="vertical"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent">
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-	<ListView
-		android:minWidth="25px"
-		android:minHeight="25px"
+		<ScrollView
+				android:minWidth="25px"
+				android:minHeight="25px"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:id="@+id/scrollView1" >
+		<LinearLayout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		android:orientation="vertical"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:id="@+id/listViewNewActivity" />
+		android:paddingTop="20dp">
+		
+			
+			<android.support.design.widget.TextInputLayout
+				android:id="@+id/text_input_layout_1"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:gravity="center"
+				android:paddingLeft="30dp"
+				android:paddingRight="30dp">
+				<EditText
+					android:id="@+id/etResponsable"
+					android:drawableLeft="@drawable/baseline_account_circle_24"
+					android:inputType="textPersonName"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_centerHorizontal="true"
+					android:layout_centerVertical="true"
+					android:drawablePadding="15dp"
+					android:paddingLeft="15dp"
+					android:paddingStart="15dp"
+					android:ems="10"
+					android:hint="Responsable" />
+			</android.support.design.widget.TextInputLayout>
+
+			<android.support.design.widget.TextInputLayout
+			android:id="@+id/text_input_layout_2"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center"
+			android:paddingLeft="30dp"
+			android:paddingRight="30dp">
+
+				<EditText
+					android:id="@+id/etNombreActividad"
+					android:drawableLeft="@drawable/baseline_assignment_24"
+					android:inputType="text"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_centerHorizontal="true"
+					android:layout_centerVertical="true"
+					android:drawablePadding="15dp"
+					android:paddingLeft="15dp"
+					android:paddingStart="15dp"
+					android:ems="10"
+					android:hint="Nombre de la actividad" />
+
+			</android.support.design.widget.TextInputLayout>
+			<android.support.design.widget.TextInputLayout
+			android:id="@+id/text_input_layout_3"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center"
+			android:paddingLeft="30dp"
+			android:paddingRight="30dp">
+
+				<EditText
+					android:id="@+id/etDescActividad"
+					android:drawableLeft="@drawable/baseline_chrome_reader_mode_24"
+					android:inputType="textMultiLine"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_centerHorizontal="true"
+					android:layout_centerVertical="true"
+					android:drawablePadding="15dp"
+					android:paddingLeft="15dp"
+					android:paddingStart="15dp"
+					android:ems="10"
+					android:hint="Descripción" />
+
+			</android.support.design.widget.TextInputLayout>
+			<android.support.design.widget.TextInputLayout
+			android:id="@+id/text_input_layout_4"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center"
+			android:paddingLeft="30dp"
+			android:paddingRight="30dp">
+
+				<EditText
+					android:id="@+id/etCliente"
+					android:drawableLeft="@drawable/baseline_record_voice_over_24"
+					android:inputType="textPersonName"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_centerHorizontal="true"
+					android:layout_centerVertical="true"
+					android:drawablePadding="15dp"
+					android:paddingLeft="15dp"
+					android:paddingStart="15dp"
+					android:ems="10"
+					android:hint="Cliente" />
+
+			</android.support.design.widget.TextInputLayout>
+			<android.support.design.widget.TextInputLayout
+			android:id="@+id/text_input_layout_5"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center"
+			android:paddingLeft="30dp"
+			android:paddingRight="30dp">
+
+				<EditText
+					android:id="@+id/etDireccionCliente"
+					android:drawableLeft="@drawable/baseline_pin_drop_24"
+					android:inputType="textPostalAddress"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_centerHorizontal="true"
+					android:layout_centerVertical="true"
+					android:drawablePadding="15dp"
+					android:paddingLeft="15dp"
+					android:paddingStart="15dp"
+					android:ems="10"
+					android:hint="Ubicación" />
+
+			</android.support.design.widget.TextInputLayout>
+			<android.support.design.widget.TextInputLayout
+			android:id="@+id/text_input_layout_6"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center"
+			android:paddingLeft="30dp"
+			android:paddingRight="30dp">
+
+				<EditText
+					android:id="@+id/etTelCliente"
+					android:drawableLeft="@drawable/baseline_phone_24"
+					android:inputType="phone"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_centerHorizontal="true"
+					android:layout_centerVertical="true"
+					android:drawablePadding="15dp"
+					android:paddingLeft="15dp"
+					android:paddingStart="15dp"
+					android:ems="10"
+					android:hint="No. de contacto" />
+
+			</android.support.design.widget.TextInputLayout>
+			<android.support.design.widget.TextInputLayout
+			android:id="@+id/text_input_layout_7"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center"
+			android:paddingLeft="30dp"
+			android:paddingRight="30dp">
+
+				<EditText
+					android:id="@+id/etFechaAcordada"
+					android:drawableLeft="@drawable/baseline_date_range_24"
+					android:inputType="datetime"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_centerHorizontal="true"
+					android:layout_centerVertical="true"
+					android:drawablePadding="15dp"
+					android:paddingLeft="15dp"
+					android:paddingStart="15dp"
+					android:ems="10"
+					android:clickable="true"
+					android:editable="false"
+					android:hint="Fecha y hora de la cita" />
+
+			</android.support.design.widget.TextInputLayout>
+		
+		</LinearLayout>
+
+	</ScrollView>
+
+	<android.support.design.widget.FloatingActionButton
+		android:id="@+id/fab1"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="bottom|end"
+		android:layout_margin="@dimen/fab_margin"
+		android:src="@drawable/baseline_sd_storage_24" />
 	
 
-
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

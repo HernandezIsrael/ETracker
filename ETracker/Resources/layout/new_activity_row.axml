@@ -3,19 +3,32 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-	<TextView
-		android:text="Text"
+    <TextView
+        android:text="Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:id="@+id/textViewActivityFormRow"
+        android:paddingLeft="7dp" />
+
+	<android.support.design.widget.TextInputLayout
+		android:id="@+id/text_input_layout"
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:minWidth="25px"
-		android:minHeight="25px"
-		android:id="@+id/textViewActivityFormRow" />
-	<EditText
+		android:layout_height="wrap_content">
+
+		<EditText
 		android:inputType="textPersonName"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:id="@+id/editTextActivityFormRow" />
-
+		android:id="@+id/editTextActivityFormRow"
+		android:drawablePadding="15dp"
+		android:paddingLeft="15dp"
+		android:paddingStart="15dp"
+		android:paddingTop="10dp"
+		android:ems="10"/>
+	
+	</android.support.design.widget.TextInputLayout>
 
 
 </LinearLayout>
