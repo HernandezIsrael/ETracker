@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using Android.App;
 using Android.Content;
+using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.Design.Widget;
@@ -29,7 +31,10 @@ namespace ETracker
 
             ScrollView sv = FindViewById<ScrollView>(Resource.Id.scrollView1);
 
+            TextView title = FindViewById<TextView>(Resource.Id.activityTitle);
+
             TextInputLayout date = FindViewById<TextInputLayout>(Resource.Id.text_input_layout_7);
+            TextInputLayout til;
 
             FloatingActionButton fab1 = FindViewById<FloatingActionButton>(Resource.Id.fab1);
 
@@ -40,6 +45,28 @@ namespace ETracker
             EditText etUbicacion = FindViewById<EditText>(Resource.Id.etDireccionCliente);
             EditText etTelefono = FindViewById<EditText>(Resource.Id.etTelCliente);
             EditText etFecha = FindViewById<EditText>(Resource.Id.etFechaAcordada);
+
+            bool error;
+
+            List<EditText> form = new List<EditText>();
+
+            title.SetTypeface(Typeface.CreateFromAsset(Assets, "Raleway-Regular.ttf"), TypefaceStyle.Bold);
+
+            etResponsable.Tag = "Responsable";
+            etActividad.Tag = "Actividad";
+            etDes.Tag = "Descripcion";
+            etCliente.Tag = "Cliente";
+            etUbicacion.Tag = "Ubicacion";
+            etTelefono.Tag = "Telefono";
+            etFecha.Tag = "Fecha";
+
+            form.Add(etResponsable);
+            form.Add(etActividad);
+            form.Add(etDes);
+            form.Add(etCliente);
+            form.Add(etUbicacion);
+            form.Add(etTelefono);
+            form.Add(etFecha);
 
             sv.Enabled = false;
 
@@ -54,7 +81,7 @@ namespace ETracker
 
             etFecha.Click += delegate
             {
-                HideKeyboard(this);                 
+                HideKeyboard(this);
                 DatePickerFragment frag = DatePickerFragment.NewInstance(delegate (DateTime time)
                 {
                     dateTime = time.ToLongDateString();
@@ -63,7 +90,6 @@ namespace ETracker
                     delegate (DateTime time2)
                     {
                         dateTime += " " + time2.ToShortTimeString();
-                        Log.Debug("------------- DEBUG -------------", "Datetime: " + dateTime);
                         etFecha.Text = dateTime;
                     });
 
@@ -74,7 +100,116 @@ namespace ETracker
                 frag.Show(FragmentManager, DatePickerFragment.TAG);
             };
 
-            fab1.Click += FabOnClick;
+            fab1.Click += delegate
+            {
+                error = false;
+                foreach (EditText et in form)
+                {
+
+                    switch (et.Tag.ToString())
+                    {
+                        case "Responsable":
+                            if (!IsValid(".{4,}", et))
+                            {
+                                til = FindViewById<TextInputLayout>(Resource.Id.text_input_layout_1);
+                                til.Error = "No válido";
+                                error = true;
+                            }
+                            else
+                            {
+                                til = FindViewById<TextInputLayout>(Resource.Id.text_input_layout_1);
+                                til.Error = null;
+                            }
+                            break;
+                        case "Actividad":
+                            if (!IsValid(".{10,}", et))
+                            {
+                                til = FindViewById<TextInputLayout>(Resource.Id.text_input_layout_2);
+                                til.Error = "No válido";
+                                error = true;
+                            }
+                            else
+                            {
+                                til = FindViewById<TextInputLayout>(Resource.Id.text_input_layout_2);
+                                til.Error = null;
+                            }
+                            break;
+                        case "Descripcion":
+                            if (!IsValid(".{30,}", et))
+                            {
+                                til = FindViewById<TextInputLayout>(Resource.Id.text_input_layout_3);
+                                til.Error = "No válido";
+                                error = true;
+                            }
+                            else
+                            {
+                                til = FindViewById<TextInputLayout>(Resource.Id.text_input_layout_3);
+                                til.Error = null;
+                            }
+                            break;
+                        case "Cliente":
+                            if (!IsValid(".{5,}", et))
+                            {
+                                til = FindViewById<TextInputLayout>(Resource.Id.text_input_layout_4);
+                                til.Error = "No válido";
+                                error = true;
+                            }
+                            else
+                            {
+                                til = FindViewById<TextInputLayout>(Resource.Id.text_input_layout_4);
+                                til.Error = null;
+                            }
+                            break;
+                        case "Ubicacion":
+                            if (!IsValid(".{20,}", et))
+                            {
+                                til = FindViewById<TextInputLayout>(Resource.Id.text_input_layout_5);
+                                til.Error = "No válido";
+                                error = true;
+                            }
+                            else
+                            {
+                                til = FindViewById<TextInputLayout>(Resource.Id.text_input_layout_5);
+                                til.Error = null;
+                            }
+                            break;
+                        case "Telefono":
+                            if (!IsValid(".{6,}", et))
+                            {
+                                til = FindViewById<TextInputLayout>(Resource.Id.text_input_layout_6);
+                                til.Error = "No válido";
+                                error = true;
+                            }
+                            else
+                            {
+                                til = FindViewById<TextInputLayout>(Resource.Id.text_input_layout_6);
+                                til.Error = null;
+                            }
+                            break;
+                        case "Fecha":
+                            if (!IsValid(".{5,}", et))
+                            {
+                                date.Error = "No válido";
+                                error = true;
+                            }
+                            else
+                            {
+                                date.Error = null;
+                            }
+                            break;
+                    }
+                }
+
+                if (error)
+                {
+                    Snackbar.Make(fab1, "Hay campos erróneos o incompletos. Verifícalos y vuialve a intentar", Snackbar.LengthLong).SetAction("Action", (Android.Views.View.IOnClickListener)null).Show();
+                }
+                else
+                {
+                    Toast.MakeText(this, "¡Listo!", ToastLength.Long).Show();
+                }
+
+            };
 
         }
 
@@ -106,6 +241,13 @@ namespace ETracker
         {
             View view = (View)sender;
             Snackbar.Make(view, "Replace with your own action", Snackbar.LengthLong).SetAction("Action", (Android.Views.View.IOnClickListener)null).Show();
+        }
+
+        private bool IsValid(string regex, EditText et)
+        {
+            Regex r = new Regex(@regex, RegexOptions.IgnoreCase);
+            Match m = r.Match(et.Text);
+            return m.Success;
         }
 
     }
