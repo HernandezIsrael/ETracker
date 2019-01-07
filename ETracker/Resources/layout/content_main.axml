@@ -13,5 +13,12 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:text="No hay actividades registradas todavía :(" />
+	<ImageView
+		android:src="@drawable/baseline_hot_tub_24"
+		android:layout_width="75dp"
+		android:layout_height="100dp"
+		android:layout_centerInParent="true"
+		android:layout_above="@id/textView1"
+		android:id="@+id/imageView1"/>
 
 </RelativeLayout>

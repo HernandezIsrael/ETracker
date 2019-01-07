@@ -202,7 +202,9 @@ namespace ETracker
 
                 if (error)
                 {
-                    Snackbar.Make(fab1, "Hay campos erróneos o incompletos. Verifícalos y vuialve a intentar", Snackbar.LengthLong).SetAction("Action", (Android.Views.View.IOnClickListener)null).Show();
+                    //snack = Snackbar.Make(FindViewById<CoordinatorLayout>(Resource.Id.cl), "Hay campos erróneos o incompletos. Verifícalos y vuialve a intentar", Snackbar.LengthLong).SetAction("Oki", (view) => { /*Undo message sending here.*/ });
+                    //snack.Show();
+                    Toast.MakeText(this, "Hay campos erróneos o incompletos. Verifícalos y vuialve a intentar", ToastLength.Long).Show();
                 }
                 else
                 {
@@ -235,12 +237,6 @@ namespace ETracker
                 });
 
             frag.Show(FragmentManager, TimePickerFragment.TAG);
-        }
-
-        private void FabOnClick(object sender, EventArgs eventArgs)
-        {
-            View view = (View)sender;
-            Snackbar.Make(view, "Replace with your own action", Snackbar.LengthLong).SetAction("Action", (Android.Views.View.IOnClickListener)null).Show();
         }
 
         private bool IsValid(string regex, EditText et)
