@@ -15,7 +15,7 @@ using Android.Widget;
 
 namespace ETracker
 {
-    [Activity(Label = "Nueva Actividad")]
+    [Activity(Label = "Registro")]
     public class RegisterActivity : AppCompatActivity
     {
 
@@ -202,9 +202,8 @@ namespace ETracker
 
                 if (error)
                 {
-                    //snack = Snackbar.Make(FindViewById<CoordinatorLayout>(Resource.Id.cl), "Hay campos erróneos o incompletos. Verifícalos y vuialve a intentar", Snackbar.LengthLong).SetAction("Oki", (view) => { /*Undo message sending here.*/ });
-                    //snack.Show();
-                    Toast.MakeText(this, "Hay campos erróneos o incompletos. Verifícalos y vuialve a intentar", ToastLength.Long).Show();
+                    Snackbar.Make(FindViewById<LinearLayout>(Resource.Id.newActivityLinearLayout), "Hay campos erróneos o incompletos. Verifícalos y vuialve a intentar", Snackbar.LengthIndefinite).SetAction("Ok", (view) => { /*Undo message sending here.*/ }).Show();
+                    //Toast.MakeText(this, "Hay campos erróneos o incompletos. Verifícalos y vuialve a intentar", ToastLength.Long).Show();
                 }
                 else
                 {
