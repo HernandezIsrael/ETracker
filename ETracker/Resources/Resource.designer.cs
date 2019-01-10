@@ -3400,6 +3400,9 @@ namespace ETracker
 			// aapt resource value: 0x7f090020
 			public const int character_counter_pattern = 2131296288;
 			
+			// aapt resource value: 0x7f090029
+			public const int log_debug_tag = 2131296297;
+			
 			// aapt resource value: 0x7f090021
 			public const int password_toggle_content_description = 2131296289;
 			
