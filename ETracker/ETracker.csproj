@@ -63,6 +63,7 @@
     <Compile Include="MainActivity.cs" />
     <Compile Include="NewActivityAdapter.cs" />
     <Compile Include="RegisterActivity.cs" />
+    <Compile Include="Resources\BitmapHelpers.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TimePickerFragment.cs" />
