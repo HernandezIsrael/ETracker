@@ -18,7 +18,6 @@ using System.Linq;
 using Android.Provider;
 using Java.IO;
 using Android.Graphics;
-using Uri = Android.Net.Uri;
 
 namespace ETracker
 {
@@ -28,16 +27,14 @@ namespace ETracker
 
         LinearLayout linearLayout;
 
-        TextView latitude;
-        TextView longitude;
-        TextView provider;
-
         ImageView cameraView;
 
         TextInputEditText t;
 
-        Button locate;
-        Button takePic;
+        TextView title;
+
+        FloatingActionButton fab;
+        FloatingActionButton takePic;
 
         Location currentLocation;
         LocationManager locationManager;
@@ -60,25 +57,23 @@ namespace ETracker
             Android.Support.V7.Widget.Toolbar toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
             SetSupportActionBar(toolbar);
 
-            FloatingActionButton fab = FindViewById<FloatingActionButton>(Resource.Id.fab);
-            fab.Click += FabOnClick;
+            fab = FindViewById<FloatingActionButton>(Resource.Id.fab);
 
-            latitude = FindViewById<TextView>(Resource.Id.latitude);
-            longitude = FindViewById<TextView>(Resource.Id.longitude);
-            provider = FindViewById<TextView>(Resource.Id.provider);
             t = FindViewById<TextInputEditText>(Resource.Id.textInputEditText1);
-            locate = FindViewById<Button>(Resource.Id.locate);
             cameraView = FindViewById<ImageView>(Resource.Id.cameraImageView);
-            takePic = FindViewById<Button>(Resource.Id.takePic);
+            takePic = FindViewById<FloatingActionButton>(Resource.Id.takePic);
             linearLayout = FindViewById<LinearLayout>(Resource.Id.linearLayout1);
+            title = FindViewById<TextView>(Resource.Id.homeTitle);
 
             InitializeLocationManager();
 
-            provider.Text += " " + locationProvider;
+            title.SetTypeface(Typeface.CreateFromAsset(Assets, "Raleway-Regular.ttf"), TypefaceStyle.Bold);
+            t.SetTypeface(Typeface.CreateFromAsset(Assets, "Raleway-Regular.ttf"), TypefaceStyle.Bold);
 
+            fab.Visibility = ViewStates.Invisible;
+
+            fab.Click += FabOnClick;
             takePic.Click += TakeAPicture;
-
-            locate.Click += Locate_Click;
 
         }
 
@@ -113,6 +108,7 @@ namespace ETracker
         {
             base.OnResume();
         }
+
         protected override void OnPause()
         {
             base.OnPause();
@@ -146,7 +142,24 @@ namespace ETracker
                         Toast.MakeText(this, "Permissions has been grtanted", ToastLength.Long).Show();
                         Log.Debug("@string/log_debug_tag", ex.Message);
                     }
+
                     InitializeLocationManager();
+
+                    ////////////////////////////////////// BORRAR SI NO FUNCIONA ///////////////////////////////////////////////
+
+                    Location lastKnownLocation = locationManager.GetLastKnownLocation(locationProvider);
+
+                    if (lastKnownLocation != null)
+                    {
+                        locationManager.RequestLocationUpdates(locationProvider, 5000, 2, this);
+                        t.Text = lastKnownLocation.Latitude.ToString() + ", " + lastKnownLocation.Longitude.ToString();
+                    }
+                    else
+                    {
+                        Toast.MakeText(this, "Couldn't get last know location", ToastLength.Long).Show();
+                    }
+
+                    ////////////////////////////////////// BORRAR SI NO FUNCIONA ///////////////////////////////////////////////
                 }
                 else
                 {
@@ -238,8 +251,6 @@ namespace ETracker
             }
             else
             {
-                latitude.Text = "Latitude: " + currentLocation.Latitude.ToString();
-                longitude.Text = "Longitude: " + currentLocation.Longitude.ToString();
                 t.Text = currentLocation.Latitude.ToString() + ", " + currentLocation.Longitude.ToString();
             }
         }
@@ -257,59 +268,6 @@ namespace ETracker
         public void OnStatusChanged(string provider, [GeneratedEnum] Availability status, Bundle extras)
         {
             Log.Debug("@string/log_debug_tag", "Provider: " + provider + ", Availability: " + status.ToString() + ", Extras: " + extras.ToString());
-        }
-
-        private void Locate_Click(object sender, EventArgs e)
-        {
-            if (ContextCompat.CheckSelfPermission(this, Manifest.Permission.AccessFineLocation) == (int)Permission.Granted)
-            {
-                // We have permission, go ahead and use the location.
-
-                Location lastKnownLocation = locationManager.GetLastKnownLocation(locationProvider);
-
-                if (lastKnownLocation != null)
-                {
-                    locationManager.RequestLocationUpdates(locationProvider, 5000, 2, this);
-                    latitude.Text = "Latitude: " + lastKnownLocation.Latitude.ToString();
-                    longitude.Text = "Longitude: " + lastKnownLocation.Longitude.ToString();
-                    t.Text = lastKnownLocation.Latitude.ToString() + ", " + lastKnownLocation.Longitude.ToString();
-                }
-                else
-                {
-                    Toast.MakeText(this, "Couldn't get last know location", ToastLength.Long).Show();
-                }
-            }
-            else
-            {
-                // Location permission is not granted. If necessary display rationale & request.
-                if (ActivityCompat.ShouldShowRequestPermissionRationale(this, Manifest.Permission.AccessFineLocation))
-                {
-
-                    Log.Info("@string/log_debug_tag", "Displaying camera permission rationale to provide additional context.");
-
-                    var requiredPermissions = new String[] { Manifest.Permission.AccessFineLocation };
-
-                    try
-                    {
-                        Snackbar.Make(FindViewById<LinearLayout>(Resource.Id.linearLayout1), "Location access is required", Snackbar.LengthIndefinite).SetAction("OK", new Action<View>(delegate (View obj) {
-                                           ActivityCompat.RequestPermissions(this, requiredPermissions, REQUEST_LOCATION);
-                                       }
-                                )
-                        ).Show();
-                    }
-                    catch (Exception ex)
-                    {
-                        Toast.MakeText(this, "Location access is required", ToastLength.Long).Show();
-                        Log.Debug("@string/log_debug_tag", ex.Message);
-                    }
-
-                    
-                }
-                else
-                {
-                    ActivityCompat.RequestPermissions(this, new String[] { Manifest.Permission.AccessFineLocation }, REQUEST_LOCATION);
-                }
-            }
         }
 
 
@@ -358,6 +316,66 @@ namespace ETracker
             base.OnActivityResult(requestCode, resultCode, data);
             Bitmap bm = (Bitmap)data.Extras.Get("data");
             cameraView.SetImageBitmap(bm);
+            takePic.SetImageResource(Resource.Drawable.baseline_done_24);
+
+            /*********** Obtain the location ***********/
+
+            if (ContextCompat.CheckSelfPermission(this, Manifest.Permission.AccessFineLocation) == (int)Permission.Granted)
+            {
+                // We have permission, go ahead and use the location.
+
+                Location lastKnownLocation = locationManager.GetLastKnownLocation(locationProvider);
+
+                if (lastKnownLocation != null)
+                {
+                    locationManager.RequestLocationUpdates(locationProvider, 5000, 2, this);
+                    t.Text = lastKnownLocation.Latitude.ToString() + ", " + lastKnownLocation.Longitude.ToString();
+                    try
+                    {
+                        Snackbar.Make(linearLayout, "Done, now just press 'send' button", Snackbar.LengthIndefinite).SetAction("OK", (view) => { }).Show();
+                    }
+                    catch
+                    {
+                        Toast.MakeText(this, "Done, now just press 'send' button", ToastLength.Long).Show();
+                    }
+                }
+                else
+                {
+                    Toast.MakeText(this, "Couldn't get last know location", ToastLength.Long).Show();
+                }
+            }
+            else
+            {
+                // Location permission is not granted. If necessary display rationale & request.
+                if (ActivityCompat.ShouldShowRequestPermissionRationale(this, Manifest.Permission.AccessFineLocation))
+                {
+
+                    Log.Info("@string/log_debug_tag", "Displaying camera permission rationale to provide additional context.");
+
+                    var requiredPermissions = new String[] { Manifest.Permission.AccessFineLocation };
+
+                    try
+                    {
+                        Snackbar.Make(FindViewById<LinearLayout>(Resource.Id.linearLayout1), "Location access is required", Snackbar.LengthIndefinite).SetAction("OK", new Action<View>(delegate (View obj) {
+                            ActivityCompat.RequestPermissions(this, requiredPermissions, REQUEST_LOCATION);
+                        }
+                                )
+                        ).Show();
+                    }
+                    catch (Exception ex)
+                    {
+                        Toast.MakeText(this, "Location access is required", ToastLength.Long).Show();
+                        Log.Debug("@string/log_debug_tag", ex.Message);
+                    }
+
+
+                }
+                else
+                {
+                    ActivityCompat.RequestPermissions(this, new String[] { Manifest.Permission.AccessFineLocation }, REQUEST_LOCATION);
+                }
+            }
+
         }
 
     }

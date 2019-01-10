@@ -32,44 +32,33 @@
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
 			android:id="@+id/linearLayout1">
+			<TextView
+				android:text="Check-in!"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="100dp"
+				android:gravity="center"
+				android:textSize="25sp"
+				android:textColor="#ff1f1f1f" 
+				android:id="@+id/homeTitle" />
 
 			<ImageView
-				android:src="@android:drawable/ic_menu_gallery"
+				android:src="@drawable/baseline_speaker_phone_24"
+				android:layout_marginTop="50dp"
 				android:layout_width="match_parent"
 				android:layout_height="200dp"
-				android:layout_marginTop="50dp"
 				android:id="@+id/cameraImageView" />
 
-			<TextView
-				android:text="Latitude: "
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:paddingTop="70dp"
-				android:id="@+id/latitude" />
-			<TextView
-				android:text="Longitude:"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:id="@+id/longitude" />
-			<TextView
-				android:text="Provider:"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:id="@+id/provider" />
 			<android.support.design.widget.TextInputEditText
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:id="@+id/textInputEditText1" />
-			<Button
-				android:text="Locate"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:id="@+id/locate" />
-			<Button
-				android:text="Take picture"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:id="@+id/takePic" />
+				android:id="@+id/textInputEditText1"
+				android:hint="Your location will appear here..."
+				android:editable="false"
+				android:gravity="center"
+				android:layout_marginTop="25dp"
+				android:layout_marginLeft="20dp"
+				android:layout_marginRight="20dp" />
 		</LinearLayout>
 	
 	</ScrollView>
@@ -84,6 +73,15 @@
 		android:layout_gravity="bottom|end"
 		android:layout_margin="@dimen/fab_margin"
 		android:src="@drawable/baseline_add_24"
+		android:tint="#ffffffff"/>
+
+	<android.support.design.widget.FloatingActionButton
+		android:id="@+id/takePic"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="bottom|center"
+		android:layout_margin="@dimen/fab_margin"
+		android:src="@drawable/baseline_linked_camera_24"
 		android:tint="#ffffffff"/>
 
 </android.support.design.widget.CoordinatorLayout>
