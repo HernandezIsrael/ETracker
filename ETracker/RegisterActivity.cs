@@ -50,7 +50,7 @@ namespace ETracker
 
             List<EditText> form = new List<EditText>();
 
-            title.SetTypeface(Typeface.CreateFromAsset(Assets, "Raleway-Regular.ttf"), TypefaceStyle.Bold);
+            title.SetTypeface(Typeface.CreateFromAsset(Assets, "Product Sans Regular"), TypefaceStyle.Bold);
 
             etResponsable.Tag = "Responsable";
             etActividad.Tag = "Actividad";

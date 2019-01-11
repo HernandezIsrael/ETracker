@@ -67,8 +67,8 @@ namespace ETracker
 
             InitializeLocationManager();
 
-            title.SetTypeface(Typeface.CreateFromAsset(Assets, "Raleway-Regular.ttf"), TypefaceStyle.Bold);
-            t.SetTypeface(Typeface.CreateFromAsset(Assets, "Raleway-Regular.ttf"), TypefaceStyle.Bold);
+            title.SetTypeface(Typeface.CreateFromAsset(Assets, "Product Sans Regular.ttf"), TypefaceStyle.Bold);
+            t.SetTypeface(Typeface.CreateFromAsset(Assets, "Product Sans Regular.ttf"), TypefaceStyle.Normal);
 
             fab.Visibility = ViewStates.Invisible;
 
@@ -152,7 +152,7 @@ namespace ETracker
                     if (lastKnownLocation != null)
                     {
                         locationManager.RequestLocationUpdates(locationProvider, 5000, 2, this);
-                        t.Text = lastKnownLocation.Latitude.ToString() + ", " + lastKnownLocation.Longitude.ToString();
+                        t.Text = "N: " + lastKnownLocation.Latitude.ToString() + ", W: " + lastKnownLocation.Longitude.ToString();
                     }
                     else
                     {
@@ -251,7 +251,7 @@ namespace ETracker
             }
             else
             {
-                t.Text = currentLocation.Latitude.ToString() + ", " + currentLocation.Longitude.ToString();
+                t.Text = "N: " + currentLocation.Latitude.ToString() + ", W: " + currentLocation.Longitude.ToString();
             }
         }
 
@@ -314,8 +314,19 @@ namespace ETracker
         protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
         {
             base.OnActivityResult(requestCode, resultCode, data);
-            Bitmap bm = (Bitmap)data.Extras.Get("data");
-            cameraView.SetImageBitmap(bm);
+
+            Bitmap bm;
+
+            if (resultCode == Result.Ok)
+            {
+                bm = (Bitmap)data.Extras.Get("data");
+                cameraView.SetImageBitmap(bm);
+            }
+            else
+            {
+                cameraView.SetImageBitmap(null);
+                cameraView.SetImageResource(Resource.Drawable.baseline_speaker_phone_24);
+            }
             takePic.SetImageResource(Resource.Drawable.baseline_done_24);
 
             /*********** Obtain the location ***********/
@@ -329,15 +340,7 @@ namespace ETracker
                 if (lastKnownLocation != null)
                 {
                     locationManager.RequestLocationUpdates(locationProvider, 5000, 2, this);
-                    t.Text = lastKnownLocation.Latitude.ToString() + ", " + lastKnownLocation.Longitude.ToString();
-                    try
-                    {
-                        Snackbar.Make(linearLayout, "Done, now just press 'send' button", Snackbar.LengthIndefinite).SetAction("OK", (view) => { }).Show();
-                    }
-                    catch
-                    {
-                        Toast.MakeText(this, "Done, now just press 'send' button", ToastLength.Long).Show();
-                    }
+                    t.Text = "N: "+ lastKnownLocation.Latitude.ToString() + ", W: " + lastKnownLocation.Longitude.ToString();
                 }
                 else
                 {

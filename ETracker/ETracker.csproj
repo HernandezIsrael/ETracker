@@ -72,6 +72,10 @@
     <AndroidAsset Include="Assets\Raleway-Medium.ttf" />
     <AndroidAsset Include="Assets\Raleway-Regular.ttf" />
     <AndroidAsset Include="Assets\Raleway-SemiBold.ttf" />
+    <AndroidAsset Include="Assets\Product Sans Bold Italic.ttf" />
+    <AndroidAsset Include="Assets\Product Sans Bold.ttf" />
+    <AndroidAsset Include="Assets\Product Sans Italic.ttf" />
+    <AndroidAsset Include="Assets\Product Sans Regular.ttf" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Properties\AndroidManifest.xml" />
     <None Include="Assets\AboutAssets.txt" />
