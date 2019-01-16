@@ -2230,26 +2230,26 @@ namespace ETracker
 			// aapt resource value: 0x7f020053
 			public const int avd_hide_password = 2130837587;
 			
-			// aapt resource value: 0x7f02007d
-			public const int avd_hide_password_1 = 2130837629;
-			
-			// aapt resource value: 0x7f02007e
-			public const int avd_hide_password_2 = 2130837630;
-			
 			// aapt resource value: 0x7f02007f
-			public const int avd_hide_password_3 = 2130837631;
+			public const int avd_hide_password_1 = 2130837631;
+			
+			// aapt resource value: 0x7f020080
+			public const int avd_hide_password_2 = 2130837632;
+			
+			// aapt resource value: 0x7f020081
+			public const int avd_hide_password_3 = 2130837633;
 			
 			// aapt resource value: 0x7f020054
 			public const int avd_show_password = 2130837588;
 			
-			// aapt resource value: 0x7f020080
-			public const int avd_show_password_1 = 2130837632;
-			
-			// aapt resource value: 0x7f020081
-			public const int avd_show_password_2 = 2130837633;
-			
 			// aapt resource value: 0x7f020082
-			public const int avd_show_password_3 = 2130837634;
+			public const int avd_show_password_1 = 2130837634;
+			
+			// aapt resource value: 0x7f020083
+			public const int avd_show_password_2 = 2130837635;
+			
+			// aapt resource value: 0x7f020084
+			public const int avd_show_password_3 = 2130837636;
 			
 			// aapt resource value: 0x7f020055
 			public const int baseline_account_circle_24 = 2130837589;
@@ -2285,91 +2285,97 @@ namespace ETracker
 			public const int baseline_linked_camera_24 = 2130837599;
 			
 			// aapt resource value: 0x7f020060
-			public const int baseline_offline_pin_24 = 2130837600;
+			public const int baseline_mail_outline = 2130837600;
 			
 			// aapt resource value: 0x7f020061
-			public const int baseline_phone_24 = 2130837601;
+			public const int baseline_mail_outline_24 = 2130837601;
 			
 			// aapt resource value: 0x7f020062
-			public const int baseline_pin_drop_24 = 2130837602;
+			public const int baseline_offline_pin_24 = 2130837602;
 			
 			// aapt resource value: 0x7f020063
-			public const int baseline_record_voice_over_24 = 2130837603;
+			public const int baseline_phone_24 = 2130837603;
 			
 			// aapt resource value: 0x7f020064
-			public const int baseline_sd_storage_24 = 2130837604;
+			public const int baseline_pin_drop_24 = 2130837604;
 			
 			// aapt resource value: 0x7f020065
-			public const int baseline_send_24 = 2130837605;
+			public const int baseline_record_voice_over_24 = 2130837605;
 			
 			// aapt resource value: 0x7f020066
-			public const int baseline_speaker_phone_24 = 2130837606;
+			public const int baseline_sd_storage_24 = 2130837606;
 			
 			// aapt resource value: 0x7f020067
-			public const int design_bottom_navigation_item_background = 2130837607;
+			public const int baseline_send_24 = 2130837607;
 			
 			// aapt resource value: 0x7f020068
-			public const int design_fab_background = 2130837608;
+			public const int baseline_speaker_phone_24 = 2130837608;
 			
 			// aapt resource value: 0x7f020069
-			public const int design_ic_visibility = 2130837609;
+			public const int design_bottom_navigation_item_background = 2130837609;
 			
 			// aapt resource value: 0x7f02006a
-			public const int design_ic_visibility_off = 2130837610;
+			public const int design_fab_background = 2130837610;
 			
 			// aapt resource value: 0x7f02006b
-			public const int design_password_eye = 2130837611;
+			public const int design_ic_visibility = 2130837611;
 			
 			// aapt resource value: 0x7f02006c
-			public const int design_snackbar_background = 2130837612;
+			public const int design_ic_visibility_off = 2130837612;
 			
 			// aapt resource value: 0x7f02006d
-			public const int ic_add = 2130837613;
+			public const int design_password_eye = 2130837613;
 			
 			// aapt resource value: 0x7f02006e
-			public const int navigation_empty_icon = 2130837614;
+			public const int design_snackbar_background = 2130837614;
 			
 			// aapt resource value: 0x7f02006f
-			public const int notification_action_background = 2130837615;
+			public const int ic_add = 2130837615;
 			
 			// aapt resource value: 0x7f020070
-			public const int notification_bg = 2130837616;
+			public const int navigation_empty_icon = 2130837616;
 			
 			// aapt resource value: 0x7f020071
-			public const int notification_bg_low = 2130837617;
+			public const int notification_action_background = 2130837617;
 			
 			// aapt resource value: 0x7f020072
-			public const int notification_bg_low_normal = 2130837618;
+			public const int notification_bg = 2130837618;
 			
 			// aapt resource value: 0x7f020073
-			public const int notification_bg_low_pressed = 2130837619;
+			public const int notification_bg_low = 2130837619;
 			
 			// aapt resource value: 0x7f020074
-			public const int notification_bg_normal = 2130837620;
+			public const int notification_bg_low_normal = 2130837620;
 			
 			// aapt resource value: 0x7f020075
-			public const int notification_bg_normal_pressed = 2130837621;
+			public const int notification_bg_low_pressed = 2130837621;
 			
 			// aapt resource value: 0x7f020076
-			public const int notification_icon_background = 2130837622;
-			
-			// aapt resource value: 0x7f02007b
-			public const int notification_template_icon_bg = 2130837627;
-			
-			// aapt resource value: 0x7f02007c
-			public const int notification_template_icon_low_bg = 2130837628;
+			public const int notification_bg_normal = 2130837622;
 			
 			// aapt resource value: 0x7f020077
-			public const int notification_tile_bg = 2130837623;
+			public const int notification_bg_normal_pressed = 2130837623;
 			
 			// aapt resource value: 0x7f020078
-			public const int notify_panel_notification_icon_bg = 2130837624;
+			public const int notification_icon_background = 2130837624;
+			
+			// aapt resource value: 0x7f02007d
+			public const int notification_template_icon_bg = 2130837629;
+			
+			// aapt resource value: 0x7f02007e
+			public const int notification_template_icon_low_bg = 2130837630;
 			
 			// aapt resource value: 0x7f020079
-			public const int tooltip_frame_dark = 2130837625;
+			public const int notification_tile_bg = 2130837625;
 			
 			// aapt resource value: 0x7f02007a
-			public const int tooltip_frame_light = 2130837626;
+			public const int notify_panel_notification_icon_bg = 2130837626;
+			
+			// aapt resource value: 0x7f02007b
+			public const int tooltip_frame_dark = 2130837627;
+			
+			// aapt resource value: 0x7f02007c
+			public const int tooltip_frame_light = 2130837628;
 			
 			static Drawable()
 			{
@@ -2453,8 +2459,8 @@ namespace ETracker
 			// aapt resource value: 0x7f08005c
 			public const int action_mode_close_button = 2131230812;
 			
-			// aapt resource value: 0x7f0800cf
-			public const int action_settings = 2131230927;
+			// aapt resource value: 0x7f0800d2
+			public const int action_settings = 2131230930;
 			
 			// aapt resource value: 0x7f0800bb
 			public const int action_text = 2131230907;
@@ -2713,6 +2719,15 @@ namespace ETracker
 			
 			// aapt resource value: 0x7f080028
 			public const int multiply = 2131230760;
+			
+			// aapt resource value: 0x7f0800cf
+			public const int nav_first_fragment = 2131230927;
+			
+			// aapt resource value: 0x7f0800d0
+			public const int nav_second_fragment = 2131230928;
+			
+			// aapt resource value: 0x7f0800d1
+			public const int nav_third_fragment = 2131230929;
 			
 			// aapt resource value: 0x7f08009e
 			public const int navigation_header_container = 2131230878;
@@ -3270,7 +3285,10 @@ namespace ETracker
 		{
 			
 			// aapt resource value: 0x7f0e0000
-			public const int menu_main = 2131623936;
+			public const int drawer_view = 2131623936;
+			
+			// aapt resource value: 0x7f0e0001
+			public const int menu_main = 2131623937;
 			
 			static Menu()
 			{
