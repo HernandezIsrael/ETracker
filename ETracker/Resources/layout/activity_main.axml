@@ -33,7 +33,6 @@
 				android:layout_height="match_parent"
 				android:id="@+id/linearLayout1">
 
-
 				<TextView
 					android:text="Check-in!"
 					android:layout_width="match_parent"
@@ -43,11 +42,13 @@
 					android:textSize="25sp"
 					android:textColor="#ff1f1f1f" 
 					android:id="@+id/homeTitle" />
+
 				<ImageView
 					android:src="@drawable/baseline_speaker_phone_24"
-					android:layout_marginTop="50dp"
 					android:layout_width="match_parent"
-					android:layout_height="250dp"
+					android:layout_marginTop="20dp"
+					android:layout_height="350dp"
+					android:layout_gravity="center"
 					android:id="@+id/cameraImageView" />
 
 				<android.support.design.widget.TextInputEditText
@@ -57,7 +58,7 @@
 					android:hint="Your location will appear here..."
 					android:editable="false"
 					android:gravity="center"
-					android:layout_marginTop="50dp"
+					android:layout_marginTop="5dp"
 					android:layout_marginLeft="20dp"
 					android:layout_marginRight="20dp" />
 			</LinearLayout>

@@ -25,10 +25,11 @@ using System.Net.Mail;
 using System.Net;
 using System.Security.Cryptography.X509Certificates;
 using Android.Telephony;
+using System.Threading.Tasks;
 
 namespace ETracker
 {
-    [Activity(Label = "Actividades", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
+    [Activity(Label = "Check-in", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
     public class MainActivity : AppCompatActivity, ILocationListener
     {
 
@@ -66,6 +67,13 @@ namespace ETracker
 
             Android.Support.V7.Widget.Toolbar toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
             SetSupportActionBar(toolbar);
+
+            Android.App.AlertDialog.Builder dialog = new Android.App.AlertDialog.Builder(this);
+            dialog.SetTitle("AVISO!");
+            dialog.SetMessage("Esta aplicación hará uso de servicios como \"Teléfono\", \"Cámará\" y \"Localización\" para conocer el estado actual del teléfono. Es necesario que autorices el uso de estos servicios cuando el dispositivo lo solicite.\n Se enviará un correo por cada aviso de arribo o \"Check-in\" a tus supervisores directos. Favor de utilizarla con moderación.");
+            dialog.SetIcon(Resource.Drawable.baseline_warning_24);
+            dialog.SetNeutralButton("Entendido", NeutralAction);
+            dialog.Show();            
 
             fab = FindViewById<FloatingActionButton>(Resource.Id.fab);
 
@@ -115,6 +123,12 @@ namespace ETracker
             switch (id)
             {
                 case Resource.Id.action_settings:
+                    Android.App.AlertDialog.Builder dialog = new Android.App.AlertDialog.Builder(this);
+                    dialog.SetTitle("Etracker");
+                    dialog.SetMessage("Creado por Israel Hernández (Depto. de Sistemas) para uso exclusivo de Clusmext S.A de C.V\nVersión: 1.0");
+                    dialog.SetIcon(Resource.Drawable.baseline_account_circle_24);
+                    dialog.SetNeutralButton("OK", NeutralAction);
+                    dialog.Show();
                     return true;
                 //case Resource.Id.home:
                 //    mDrawer.OpenDrawer(GravityCompat.Start);
@@ -166,11 +180,11 @@ namespace ETracker
 
                     try
                     {
-                        Snackbar.Make(linearLayout, "Permissions has been grtanted", Snackbar.LengthIndefinite).SetAction("OK", (view) => { }).Show();
+                        Snackbar.Make(linearLayout, "Gracias por otorgar los permisos", Snackbar.LengthIndefinite).SetAction("OK", (view) => { }).Show();
                     }
                     catch (Exception ex)
                     {
-                        Toast.MakeText(this, "Permissions has been grtanted", ToastLength.Long).Show();
+                        Toast.MakeText(this, "Gracias por otorgar los permisos", ToastLength.Long).Show();
                         Log.Debug("@string/log_debug_tag", ex.Message);
                     }
 
@@ -197,11 +211,11 @@ namespace ETracker
                     Log.Info("@string/log_debug_tag", "Location permission was NOT granted.");
                     try
                     {
-                        Snackbar.Make(linearLayout, "Permissions not granted, the app will not work propertly :(", Snackbar.LengthIndefinite).SetAction("OK", (view) => { }).Show();
+                        Snackbar.Make(linearLayout, "No se otorgó el permiso, la aplicación no funcionará correctamente :(", Snackbar.LengthIndefinite).SetAction("OK", (view) => { }).Show();
                     }
                     catch (Exception ex)
                     {
-                        Toast.MakeText(this, "Permissions not granted, the app will not work propertly :(", ToastLength.Long).Show();
+                        Toast.MakeText(this, "No se otorgó el permiso, la aplicación no funcionará correctamente :(", ToastLength.Long).Show();
                         Log.Debug("@string/log_debug_tag", ex.Message);
                     }
                 }
@@ -219,11 +233,11 @@ namespace ETracker
 
                     try
                     {
-                        Snackbar.Make(linearLayout, "Permissions has been grtanted :D", Snackbar.LengthIndefinite).SetAction("OK", (view) => { }).Show();
+                        Snackbar.Make(linearLayout, "¡Gracias! :D", Snackbar.LengthIndefinite).SetAction("OK", (view) => { }).Show();
                     }
                     catch (Exception ex)
                     {
-                        Toast.MakeText(this, "Permissions has been grtanted :D", ToastLength.Long).Show();
+                        Toast.MakeText(this, "¡Gracias! :D", ToastLength.Long).Show();
                         Log.Debug("@string/log_debug_tag", ex.Message);
                     }
 
@@ -233,11 +247,11 @@ namespace ETracker
                     Log.Info("@string/log_debug_tag", "Camera permission was NOT granted.");
                     try
                     {
-                        Snackbar.Make(linearLayout, "Permissions not granted. The app will not work propertly :c", Snackbar.LengthIndefinite).SetAction("OK", (view) => { }).Show();
+                        Snackbar.Make(linearLayout, "No se otorgó el permiso, la aplicación no funcionará correctamente :c", Snackbar.LengthIndefinite).SetAction("OK", (view) => { }).Show();
                     }
                     catch (Exception ex)
                     {
-                        Toast.MakeText(this, "Permissions not granted. The app will not work propertly :c", ToastLength.Long).Show();
+                        Toast.MakeText(this, "No se otorgó el permiso, la aplicación no funcionará correctamente :c", ToastLength.Long).Show();
                         Log.Debug("@string/log_debug_tag", ex.Message);
                     }
                 }
@@ -255,11 +269,11 @@ namespace ETracker
 
                     try
                     {
-                        Snackbar.Make(linearLayout, "Permissions has been grtanted :D", Snackbar.LengthIndefinite).SetAction("OK", (view) => { }).Show();
+                        Snackbar.Make(linearLayout, "¡Gracias! :D", Snackbar.LengthIndefinite).SetAction("OK", (view) => { }).Show();
                     }
                     catch (Exception ex)
                     {
-                        Toast.MakeText(this, "Permissions has been grtanted :D", ToastLength.Long).Show();
+                        Toast.MakeText(this, "¡Gracias! :D", ToastLength.Long).Show();
                         Log.Debug("@string/log_debug_tag", ex.Message);
                     }
 
@@ -269,11 +283,11 @@ namespace ETracker
                     Log.Info("@string/log_debug_tag", "PHONE permission was NOT granted.");
                     try
                     {
-                        Snackbar.Make(linearLayout, "Permissions not granted. The app will not work propertly :c", Snackbar.LengthIndefinite).SetAction("OK", (view) => { }).Show();
+                        Snackbar.Make(linearLayout, "No se otorgó el permiso, la aplicación no funcionará correctamente :c", Snackbar.LengthIndefinite).SetAction("OK", (view) => { }).Show();
                     }
                     catch (Exception ex)
                     {
-                        Toast.MakeText(this, "Permissions not granted. The app will not work propertly :c", ToastLength.Long).Show();
+                        Toast.MakeText(this, "No se otorgó el permiso, la aplicación no funcionará correctamente :c", ToastLength.Long).Show();
                         Log.Debug("@string/log_debug_tag", ex.Message);
                     }
                 }
@@ -404,29 +418,45 @@ namespace ETracker
                     break;
                 case mailTag:
 
-                    try
-                    {
-                        number = mTelephonyMgr.Line1Number.ToString();
-                    }
-                    catch (Exception ex)
-                    {
-                        number = "The user rejected [READ_PHONE_STATE] permission";
-                        Log.Debug("DEBUG", ex.Message);
+                    Android.App.AlertDialog.Builder dialog = new Android.App.AlertDialog.Builder(this);
+                    dialog.SetIcon(Resource.Drawable.baseline_mail_outline_24);
+                    dialog.SetTitle("Enviando...");
+                    dialog.SetMessage("Tu alerta se enviará por correo en breve.");
+                    dialog.SetNeutralButton("OK", NeutralAction);
+                    dialog.Show();
 
-                    }
+                    Task.Factory.StartNew(()=> {
 
-                    SendEmail(bm, number);
+                        try
+                        {
+                            number = mTelephonyMgr.Line1Number.ToString();
+                        }
+                        catch (Exception ex)
+                        {
+                            number = "The user rejected [READ_PHONE_STATE] permission";
+                            Log.Debug("DEBUG", ex.Message);
+
+                        }
+
+                        SendEmail(bm, number);
+                    });
+
                     takePic.SetImageResource(Resource.Drawable.baseline_linked_camera_24);
                     takePic.Tag = photoTag;
                     cameraView.SetImageBitmap(null);
                     cameraView.SetImageResource(Resource.Drawable.baseline_speaker_phone_24);
-                    t.Text = string.Empty;
+                    t.Text = "";
 
                     break;
                 case doneTag:
                     break;
             }
 
+        }
+
+        private void NeutralAction(object sender, DialogClickEventArgs e)
+        {
+            return;
         }
 
         protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
@@ -499,6 +529,8 @@ namespace ETracker
 
         }
 
+        /*************** Mail ***************/
+
         public void SendEmail(Bitmap bmpImg, string user)
         {
 
@@ -523,7 +555,12 @@ namespace ETracker
                 mail.From = new MailAddress("etacker@gmail.com");
                 mail.To.Add("israel.hernandez@clusmext.com");
                 mail.Subject = "Informe de visita.";
-                mail.Body = string.Format("Informe de visita.\n\nRealizó: {0}\nUsuario: {1}\nUbicación: {2}\nEvidencia: {3}", "informe de arrivo al lugar (check-in).", user, (t.Text == "")?"The user has not given the requested [LOCATION] permission":t.Text, "Se ha adjuntado la fotografía capturada por el usuario");
+                mail.Body = string.Format("Informe de visita." +
+                    "\n\nRealizó: {0}\nUsuario: {1}" +
+                    "\nUbicación: {2}" +
+                    "\nEvidencia: {3}" +
+                    "\n\nEste correo se generó automáticamente a través de la aplicación ETracker y no puede ser manipiulado por el usuario." +
+                    "\nSi el correo presenta algún valor faltante o dudoso puede significar que el usuario no aprovó los permisos solicitados por la aplicación.", "informe de arribo al lugar (check-in).", user, (t.Text == "")?"The user has not given the requested [LOCATION] permission":t.Text, "Se ha adjuntado la fotografía capturada por el usuario");
                 mail.Attachments.Add(image);
                 SmtpServer.Port = 587;  //gmail default port
                 SmtpServer.Credentials = new System.Net.NetworkCredential("termoinnova1@gmail.com", "Iyhnbsfg55+*");
