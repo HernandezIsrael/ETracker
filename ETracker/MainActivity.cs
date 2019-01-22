@@ -16,10 +16,7 @@ using Android.Support.V4.Content;
 using System.Collections.Generic;
 using System.Linq;
 using Android.Provider;
-using Java.IO;
 using Android.Graphics;
-using Android.Support.V4.Widget;
-using Android.Support.V4.View;
 using System.IO;
 using System.Net.Mail;
 using System.Net;
@@ -47,6 +44,8 @@ namespace ETracker
 
         Bitmap bm;
 
+        LocationHelper lh = new LocationHelper();
+
         string locationProvider;
         string number;
 
@@ -57,6 +56,9 @@ namespace ETracker
         const string photoTag = "Photo";
         const string mailTag = "Mail";
         const string doneTag = "Done";
+
+        string latitude = string.Empty;
+        string longitude = string.Empty;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -114,11 +116,8 @@ namespace ETracker
 
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
+
             int id = item.ItemId;
-            //if (id == Resource.Id.action_settings)
-            //{
-            //    return true;
-            //}
 
             switch (id)
             {
@@ -130,10 +129,6 @@ namespace ETracker
                     dialog.SetNeutralButton("OK", NeutralAction);
                     dialog.Show();
                     return true;
-                //case Resource.Id.home:
-                //    mDrawer.OpenDrawer(GravityCompat.Start);
-                //    return true;
-                    
             }
 
             return base.OnOptionsItemSelected(item);
@@ -197,7 +192,9 @@ namespace ETracker
                     if (lastKnownLocation != null)
                     {
                         locationManager.RequestLocationUpdates(locationProvider, 5000, 2, this);
-                        t.Text = "N: " + lastKnownLocation.Latitude.ToString() + ", W: " + lastKnownLocation.Longitude.ToString();
+                        latitude = lastKnownLocation.Latitude.ToString();
+                        longitude = lastKnownLocation.Longitude.ToString();
+                        t.Text = "N: " + latitude + ", W: " + longitude;
                     }
                     else
                     {
@@ -351,7 +348,9 @@ namespace ETracker
             }
             else
             {
-                t.Text = "N: " + currentLocation.Latitude.ToString() + ", W: " + currentLocation.Longitude.ToString();
+                latitude = currentLocation.Latitude.ToString();
+                longitude = currentLocation.Longitude.ToString();
+                t.Text = "N: " + latitude + ", W: " + longitude;
             }
         }
 
@@ -376,7 +375,8 @@ namespace ETracker
 
         private void TakeAPicture(object sender, EventArgs eventArgs)
         {
-
+            string msg = string.Empty;
+            int result;
             Intent intent;
 
             switch (takePic.Tag.ToString())
@@ -439,13 +439,38 @@ namespace ETracker
                         }
 
                         SendEmail(bm, number);
+
+                        result = lh.InsertLocation(number, float.Parse(latitude), float.Parse(longitude), DateTime.Now, out msg);
+
+                        if (result > 0)
+                        {
+                            try
+                            {
+                                Snackbar.Make(linearLayout, "Se ha actualizado la base de datos", Snackbar.LengthIndefinite).SetAction("OK", (view) => { }).Show();
+                            }
+                            catch
+                            {
+                                Toast.MakeText(this, "Se ha actualizado la base de datos", ToastLength.Long).Show();
+                            }
+                        }
+                        else
+                        {
+                            try
+                            {
+                                Snackbar.Make(linearLayout, "No se pudo conectar con la BD.", Snackbar.LengthIndefinite).SetAction("OK", (view) => { }).Show();
+                            }
+                            catch
+                            {
+                                Toast.MakeText(this, "No se pudo conectar con la BD.", ToastLength.Long).Show();
+                            }
+                        }
+
                     });
 
                     takePic.SetImageResource(Resource.Drawable.baseline_linked_camera_24);
                     takePic.Tag = photoTag;
                     cameraView.SetImageBitmap(null);
                     cameraView.SetImageResource(Resource.Drawable.baseline_speaker_phone_24);
-                    t.Text = "";
 
                     break;
                 case doneTag:
@@ -488,7 +513,9 @@ namespace ETracker
                 if (lastKnownLocation != null)
                 {
                     locationManager.RequestLocationUpdates(locationProvider, 5000, 2, this);
-                    t.Text = "N: "+ lastKnownLocation.Latitude.ToString() + ", W: " + lastKnownLocation.Longitude.ToString();
+                    latitude = lastKnownLocation.Latitude.ToString();
+                    longitude = lastKnownLocation.Longitude.ToString();
+                    t.Text = "N: "+ latitude + ", W: " + longitude;
                 }
                 else
                 {
